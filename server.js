@@ -8,6 +8,9 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.render('index');
 });
@@ -22,6 +25,17 @@ app.get('/about', (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.render('contact');
+});
+
+app.post('/contact/send-message', (req, res) => {
+  const { author, sender, title, message, projectdesign } = req.body;
+
+  if (author && sender && title && message && projectdesign) {
+    res.render('contact', { isSent: true, fileName: 'test.png' });
+  }
+  else {
+    res.render('contact', { isError: true });
+  }
 });
 
 app.get('/info', (req, res) => {
