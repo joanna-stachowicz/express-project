@@ -31,7 +31,7 @@ app.post('/contact/send-message', (req, res) => {
   const { author, sender, title, message, projectdesign } = req.body;
 
   if (author && sender && title && message && projectdesign) {
-    res.render('contact', { isSent: true, fileName: 'test.png' });
+    res.render('contact', { isSent: true, fileName: projectdesign });
   }
   else {
     res.render('contact', { isError: true });
